@@ -82,7 +82,9 @@ export class AwsExamStack extends cdk.Stack {
 
     fileBucket.grantReadWrite(fileProcessingFunction);
     fileTable.grantReadWriteData(fileProcessingFunction);
+    fileTable.grantReadWriteData(cleanupFunction);
     notifyTopic.grantPublish(fileProcessingFunction);
+    notifyTopic.grantPublish(cleanupFunction);
 
     new cdk.CfnOutput(this, "Stack", {
       value: "Result: ",
